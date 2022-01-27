@@ -1,4 +1,4 @@
-# kickstart-dapp-react
+# kickstarter-dapp-react
 
 Kickstarter dapp in react and solidity, learning example.
 
