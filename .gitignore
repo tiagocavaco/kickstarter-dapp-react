@@ -6,6 +6,7 @@
 .pnp.js
 .deploy
 .build
+.next
 
 # testing
 /coverage
