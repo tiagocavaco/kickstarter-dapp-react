@@ -26,6 +26,7 @@
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.1.1",
     "solc": "^0.8.11",
+    "walletlink": "^2.4.6",
     "web3": "^1.7.0",
     "web3modal": "^1.9.5"
   }
