@@ -1,4 +1,4 @@
-const supportedChains = [
+export const supportedChains = [
   {
     name: "Ethereum Mainnet",
     short_name: "eth",
@@ -16,6 +16,7 @@ const supportedChains = [
     }
   },
   {
+    default: true,
     name: "Ethereum Rinkeby",
     short_name: "rin",
     chain: "ETH",
@@ -64,5 +65,3 @@ const supportedChains = [
     }
   }
 ];
-
-export default supportedChains;

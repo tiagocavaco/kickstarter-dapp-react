@@ -1,4 +1,4 @@
-import supportedChains from "./chains";
+import { supportedChains }  from "./chains";
 
 export function getChainData(chainId) {
   const chainData = supportedChains.filter((chain) => chain.chain_id === chainId)[0];
