@@ -2,9 +2,8 @@ import { useState, useCallback, useEffect } from 'react';
 import Web3 from "web3";
 import Web3Modal from "web3modal";
 import { useGlobalContext } from '../context/store';
-import { providerOptions } from '../ethereum/connectors/providers';
-import { supportedChains } from '../ethereum/connectors/chains';
-import { getChainData } from "../ethereum/connectors/utils";
+import { providerOptions } from '../helpers/providers';
+import { supportedChains, getChainData } from '../helpers/chains';
 
 const useWeb3Modal = (config = {}) => {
   const [web3Modal, setWeb3Modal] = useState(null);
@@ -27,7 +26,7 @@ const useWeb3Modal = (config = {}) => {
       const chainId = await web3.eth.getChainId();
 
       dispatch({
-        type: 'SET_WEB3',
+        type: 'SET_CONNECTED',
         connected: true,
         provider,
         web3,
@@ -55,18 +54,18 @@ const useWeb3Modal = (config = {}) => {
     await web3Modal.clearCachedProvider();
 
     dispatch({
-      type: 'RESET_WEB3',
+      type: 'RESET_CONNECTION',
     });
   }, [provider]);
 
   const switchChain = useCallback(async (chainId) => {
     try {
-      await web3.currentProvider.request({ method: 'wallet_switchEthereumChain', params: [{ chainId }] });
+      await provider.request({ method: 'wallet_switchEthereumChain', params: [{ chainId }] });
     }
     catch (err) {
       console.log(err);
     }
-  }, [chainId]);
+  }, [provider]);
 
   useEffect(() => {
     console.log('INIT MODAL!');
@@ -89,7 +88,7 @@ const useWeb3Modal = (config = {}) => {
   }, [web3Modal]);
 
   useEffect(() => {
-    console.log('LISTENERS!');
+    console.log('CHECK LISTENERS!');
 
     if (provider?.on) {
       console.log('ADD LISTENERS!');
@@ -167,7 +166,7 @@ const useWeb3Modal = (config = {}) => {
 
   const getEtherBalance = (balance) => parseFloat(Web3.utils.fromWei(balance, "ether")).toFixed(4);
 
-  return [connect, disconnect, switchChain, connectedChain];
+  return { connect, disconnect, switchChain, connectedChain };
 }
 
 export default useWeb3Modal;

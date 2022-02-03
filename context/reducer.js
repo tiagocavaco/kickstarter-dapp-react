@@ -5,14 +5,12 @@ export const initialState = {
   address: null,
   balance: 0,
   chainId: null,
-  campaignFactoryInstance: null,
-  campaignFactoryAddress: null,
   persistenceType: 'none', //'sessionStorage',
 };
 
 export const reducer = (state, action) => {
   switch (action.type) {
-    case 'SET_WEB3':
+    case 'SET_CONNECTED':
       return {
         ...state,
         connected: action.connected,
@@ -33,16 +31,9 @@ export const reducer = (state, action) => {
         ...state,
         chainId: action.chainId,
       }
-    case 'RESET_WEB3':
+    case 'RESET_CONNECTION':
       return {
         ...initialState,
-        persistenceType: state.persistenceType
-      }
-    case 'SET_CONTRACT_INSTANCE':
-      return {
-        ...state,
-        campaignFactoryInstance: action.campaignFactoryInstance,
-        campaignFactoryAddress: action.campaignFactoryAddress,
       }
     case 'INIT_STATE':
       return action.value
