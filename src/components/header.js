@@ -1,12 +1,13 @@
 import useWeb3Modal from '../hooks/useWeb3Modal';
 import { useGlobalContext } from '../context/store';
+import { getChainData } from '../helpers/chains';
 
 const Header = () => {
-  const { globalState, dispatch } = useGlobalContext();
-  const { connected, address, balance } = globalState;
+  const { globalState } = useGlobalContext();
+  const { connected, chainId, address, balance } = globalState;
 
-  const { connect, disconnect, switchChain, connectedChain } = useWeb3Modal();
-  const { name: networkName } = connectedChain();
+  const { connect, disconnect } = useWeb3Modal();
+  const { name: networkName, native_currency: currency } = getChainData(chainId);
 
   return (
     <>
@@ -25,7 +26,7 @@ const Header = () => {
           </button>
         }
       </div>
-      {connected && <h3>You are connected to {networkName} with account {address} and balance {balance} ETH</h3>}
+      {connected && <h3>You are connected to {networkName} with account {address} and balance {balance} {currency?.symbol}</h3>}
     </>
   )
 }

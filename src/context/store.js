@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useReducer, useRef, useMemo } from 'react';
-import { reducer, initialState } from './reducer';
+import { reducer, initialState, stateToJSON } from './reducer';
 
-const GlobalContext = createContext();
+export const GlobalContext = createContext();
 
 /**
  * React Context-based Global Store with a reducer
@@ -34,8 +34,8 @@ export const GlobalStore = ({ children }) => {
     if (fromSessionStorage || fromLocalStorage) {
       console.log('INIT FROM STORAGE!');
       dispatch({
-        type: "init_stored",
-        value: fromSessionStorage || fromLocalStorage
+        type: "SET_GLOBAL_STATE",
+        values: fromSessionStorage || fromLocalStorage
       });
     }
 
@@ -52,12 +52,13 @@ export const GlobalStore = ({ children }) => {
       initialRenderGlobalState.current = false;
       return;
     }
+
     const getPersistenceType = persistenceType;
     if (getPersistenceType === 'sessionStorage') {
       console.log('POPULATE STORAGE!');
-      sessionStorage.setItem('globalState', JSON.stringify(globalState));
+      sessionStorage.setItem('globalState', stateToJSON(globalState));
     } else if (getPersistenceType === 'localStorage') {
-      localStorage.setItem('globalState', JSON.stringify(globalState));
+      localStorage.setItem('globalState', stateToJSON(globalState));
     }
   }, [globalState]);
 
@@ -70,6 +71,7 @@ export const GlobalStore = ({ children }) => {
       initialRenderPersistenceType.current = false;
       return;
     }
+
     const getPersistenceType = globalState.persistenceType;
     if (getPersistenceType === 'sessionStorage') {
       console.log('PURGE STORAGE!');

@@ -8,9 +8,9 @@ const linker = require('solc/linker');
 
 require('dotenv').config();
 
-const CampaignDeployer = require('../ethereum/.build/CampaignDeployer.json');
-const CampaignFactory = require('../ethereum/.build/CampaignFactory.json');
-const Campaign = require('../ethereum/.build/Campaign.json');
+const CampaignDeployer = require('../.build/CampaignDeployer.json');
+const CampaignFactory = require('../.build/CampaignFactory.json');
+const Campaign = require('../.build/Campaign.json');
 
 let web3;
 let accounts;

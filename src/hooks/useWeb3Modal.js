@@ -4,6 +4,7 @@ import Web3Modal from "web3modal";
 import { useGlobalContext } from '../context/store';
 import { providerOptions } from '../helpers/providers';
 import { supportedChains, getChainData } from '../helpers/chains';
+import { getEtherBalance } from '../helpers/utils';
 
 const useWeb3Modal = (config = {}) => {
   const [web3Modal, setWeb3Modal] = useState(null);
@@ -20,19 +21,21 @@ const useWeb3Modal = (config = {}) => {
 
       const web3 = new Web3(provider);
 
+      const chainId = await web3.eth.getChainId();
       const accounts = await web3.eth.getAccounts();
       const address = accounts[0];
       const balance = await web3.eth.getBalance(address);
-      const chainId = await web3.eth.getChainId();
 
       dispatch({
-        type: 'SET_CONNECTED',
-        connected: true,
-        provider,
-        web3,
-        address,
-        balance: getEtherBalance(balance),
-        chainId,
+        type: 'SET_GLOBAL_STATE',
+        values: {
+          connected: true,
+          provider,
+          web3,
+          chainId,
+          address,
+          balance: getEtherBalance(balance),
+        },
       });
     }
     catch (err) {
@@ -54,17 +57,8 @@ const useWeb3Modal = (config = {}) => {
     await web3Modal.clearCachedProvider();
 
     dispatch({
-      type: 'RESET_CONNECTION',
+      type: 'PURGE_GLOBAL_STATE',
     });
-  }, [provider]);
-
-  const switchChain = useCallback(async (chainId) => {
-    try {
-      await provider.request({ method: 'wallet_switchEthereumChain', params: [{ chainId }] });
-    }
-    catch (err) {
-      console.log(err);
-    }
   }, [provider]);
 
   useEffect(() => {
@@ -104,9 +98,11 @@ const useWeb3Modal = (config = {}) => {
           const balance = await web3.eth.getBalance(address);
 
           dispatch({
-            type: 'SET_ADDRESS',
-            address,
-            balance: getEtherBalance(balance),
+            type: 'SET_GLOBAL_STATE',
+            values: {
+              address,
+              balance: getEtherBalance(balance),
+            },
           });
         } else {
           await disconnect();
@@ -119,8 +115,20 @@ const useWeb3Modal = (config = {}) => {
         // Handle the new chain.
         // Correctly handling chain changes can be complicated.
         // We recommend reloading the page unless you have good reason not to.
+        // window.location.reload();
 
-        window.location.reload();
+        const accounts = await web3.eth.getAccounts();
+        const address = accounts[0];
+        const balance = await web3.eth.getBalance(address);
+
+        dispatch({
+          type: 'SET_GLOBAL_STATE',
+          values: {
+            chainId: Web3.utils.hexToNumber(chainId),
+            address,
+            balance: getEtherBalance(balance),
+          },
+        });
       };
 
       const handleDisconnect = async (error) => {
@@ -150,23 +158,23 @@ const useWeb3Modal = (config = {}) => {
   }, [provider]);
 
   useEffect(() => {
-    console.log('CHECK CHAIN!');
+    console.log('CHECK CHAIN IS VALID!');
 
-    if (chainId && !getChainData(chainId)) {
-      console.log('SWITCH CHAIN!');
+    if (provider?.isMetaMask && chainId) {
+      const chain = getChainData(chainId);
 
-      const defaultChain = supportedChains.find(chain => chain.default);
-      const defaultChainId = Web3.utils.toHex(defaultChain.chain_id);
+      if (!chain.enabled) {
+        console.log('SWITCH TO VALID CHAIN!');
 
-      switchChain(defaultChainId);
+        const defaultChain = supportedChains.find(chain => chain.default);
+        const defaultChainId = Web3.utils.toHex(defaultChain.chain_id);
+
+        provider.request({ method: 'wallet_switchEthereumChain', params: [{ chainId: defaultChainId }] });
+      }
     }
-  }, [chainId]);
+  }, [provider, chainId]);
 
-  const connectedChain = () => getChainData(chainId) || { name: "Invalid chain" };
-
-  const getEtherBalance = (balance) => parseFloat(Web3.utils.fromWei(balance, "ether")).toFixed(4);
-
-  return { connect, disconnect, switchChain, connectedChain };
+  return { connect, disconnect };
 }
 
 export default useWeb3Modal;

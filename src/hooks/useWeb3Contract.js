@@ -3,8 +3,8 @@ import { useGlobalContext } from '../context/store';
 
 const useWeb3Contract = (config = {}) => {
   const [contract, setContract] = useState(null);
-  const { globalState, dispatch } = useGlobalContext();
-  const { web3 } = globalState;
+  const { globalState } = useGlobalContext();
+  const { web3, chainId } = globalState;
   const { abi, address } = config;
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const useWeb3Contract = (config = {}) => {
 
       setContract(contract);
     }
-  }, [web3]);
+  }, [web3, chainId]);
 
   return { contract };
 }

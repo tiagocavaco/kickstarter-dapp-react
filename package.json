@@ -2,9 +2,10 @@
   "name": "kickstarter-dapp-react",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "mocha",
+    "ui-test": "jest",
+    "contract-test": "mocha ethereum/test",
     "build": "node ethereum/compile.js",
     "deploy": "node ethereum/deploy.js",
     "dev": "next dev"
@@ -12,10 +13,13 @@
   "author": "tiagocavaco https://github.com/tiagocavaco",
   "license": "ISC",
   "dependencies": {
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^12.1.2",
     "@truffle/hdwallet-provider": "^2.0.1",
     "dotenv": "^14.3.2",
     "fs-extra": "^10.0.0",
     "ganache-cli": "^6.12.2",
+    "jest": "^27.4.7",
     "mocha": "^9.2.0",
     "next": "^12.0.9",
     "next-route": "^2.0.0",
