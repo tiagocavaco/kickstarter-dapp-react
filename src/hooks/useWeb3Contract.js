@@ -11,13 +11,24 @@ const useWeb3Contract = (config = {}) => {
     console.log('CHECK CONTRACT INSTANCE!');
 
     if (web3) {
+      createContract();
+    }
+  }, [web3, chainId]);
+
+  const createContract = async () => {
+    const code = await web3.eth.getCode(address);
+
+    if (code != '0x') {
       console.log('CONTRACT INSTANCE CREATED!');
 
       const contract = new web3.eth.Contract(abi, address);
 
       setContract(contract);
     }
-  }, [web3, chainId]);
+    else {
+      setContract(null);
+    }
+  }
 
   return { contract };
 }
