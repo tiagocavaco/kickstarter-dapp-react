@@ -1,8 +1,12 @@
+import Web3 from "web3";
+
+const httpProvider = new Web3.providers.HttpProvider(process.env.INFURA_PROVIDER_URL);
+
 export const initialState = {
   connected: false,
-  provider: null,
-  web3: null,
-  chainId: null,
+  provider: httpProvider,
+  web3:  new Web3(httpProvider),
+  chainId: 4,
   address: null,
   balance: 0,
   persistenceType: 'sessionStorage', //'sessionStorage',
