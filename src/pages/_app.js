@@ -14,18 +14,6 @@ const App = ({ Component, pageProps }) => {
           <Component {...pageProps} />
         </Layout>
       </GlobalStore>
-      <style>{`
-        html,
-        body {
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
-        }
-      `}</style>
     </React.StrictMode>
   );
 }
