@@ -7,7 +7,7 @@ const App = ({ Component, pageProps }) => {
   return (
     <React.StrictMode>
       <Head>
-        <title>Kickstarter - DApp</title>
+        <title>Kickstarter</title>
       </Head>
       <GlobalStore>
         <Layout>

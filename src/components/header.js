@@ -2,7 +2,8 @@ import useWeb3Modal from '../hooks/useWeb3Modal';
 import { useGlobalContext } from '../context/store';
 import { getChainData } from '../helpers/chains';
 import { getTruncatedAddress } from '../helpers/utils';
-import { Container, Grid, Button } from 'semantic-ui-react';
+import { Menu, Button, Label, Icon } from 'semantic-ui-react';
+import { Link } from '../routes';
 
 const Header = () => {
   const { globalState } = useGlobalContext();
@@ -12,23 +13,37 @@ const Header = () => {
   const { name: networkName, native_currency: currency } = getChainData(chainId);
 
   return (
-    <Container>
-      <Grid columns={3} verticalAlign='middle'>
-        <Grid.Column width={'4'}>
-          <h1>THIS IS THE HEADER</h1>
-        </Grid.Column>
-        <Grid.Column width={'8'}>
-          {connected && <h4>Connected to {networkName} with account {getTruncatedAddress(address)} and balance {balance} {currency?.symbol}</h4>}
-        </Grid.Column>
-        <Grid.Column width={'4'}>
+    <Menu>
+      <Link route='/'><a className='item'>Kickstarter</a></Link>
+      <Menu.Menu position='right'>
+        <Link route='/'><a className='item'>Campaigns</a></Link>
+        <Link route='/campaigns/new'><a className='item'>+</a></Link>
+        <Menu.Item>
           {!connected ?
-            <Button positive onClick={connect} floated='right'>Connect Wallet</Button>
+            <Button basic color='blue' onClick={connect} floated='right'>Connect Wallet</Button>
             :
-            <Button negative onClick={disconnect} floated='right'>Disconnect Wallet</Button>
+            <>
+              <Button as='div' labelPosition='left' floated='right'>
+                <Label as='span' horizontal>
+                  {getTruncatedAddress(address)}
+                  <Label.Detail>
+                    <Label circular color={'black'} size='mini'>
+                      {networkName}
+                    </Label>
+                  </Label.Detail>
+                </Label>
+                <Label as='span' basic>
+                  {balance} {currency?.symbol}
+                </Label>
+                <Button basic color='red' onClick={disconnect} icon>
+                  <Icon name='user close' />
+                </Button>
+              </Button>
+            </>
           }
-        </Grid.Column>
-      </Grid>
-    </Container>
+        </Menu.Item>
+      </Menu.Menu>
+    </Menu>
   )
 }
 
