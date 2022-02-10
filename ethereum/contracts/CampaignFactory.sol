@@ -7,13 +7,13 @@ import "./CampaignDeployer.sol";
 contract CampaignFactory {
   address[] public deployedCampaigns;
 
-  function createCampaign(uint256 minimum) public {
-    address newCampaign = CampaignDeployer.createCampaign(minimum);
+  function createCampaign(uint256 minimumContribution) public {
+      address newCampaign = CampaignDeployer.createCampaign(minimumContribution);
 
-    deployedCampaigns.push(newCampaign);
+      deployedCampaigns.push(newCampaign);
   }
 
   function getDeployedCampaigns() public view returns (address[] memory) {
-    return deployedCampaigns;
+      return deployedCampaigns;
   }
 }

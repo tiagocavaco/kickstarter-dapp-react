@@ -6,20 +6,20 @@ contract Campaign {
 
     struct Request {
         string description; // describes why the request is being created
-        uint value;  // amount of ether that the manager wants to send to the vendor
-        address recipient; // address that the ether will be sent to
+        uint256 value;  // amount of ether that the manager wants to send to the vendor
+        address payable recipient; // address that the ether will be sent to
         bool complete;   // true if the request has already been processed
         mapping(address => bool) approvals; // tracks who has voted
-        uint approvalCount; // tracks number of approvals
+        uint256 approvalCount; // tracks number of approvals
     }
 
     address public manager;
 
-    uint public minimumContribution;
+    uint256 public minimumContribution;
 
     mapping(address => bool) public approvers;
 
-    uint public approversCount;
+    uint256 public approversCount;
 
     Request[] public requests;
 
@@ -28,19 +28,23 @@ contract Campaign {
         _;
     }
 
-    constructor(uint minimum, address creator){
+    constructor(uint256 minimum, address creator){
         manager = creator;
         minimumContribution = minimum;
     }
 
     function contribute() public payable {
+      bool alreadyApprover = approvers[msg.sender];
+
+      if (!alreadyApprover) {
         require(msg.value > minimumContribution, "Value should be greater than minimum contribution");
 
         approvers[msg.sender] = true;
         approversCount++;
+      }
     }
 
-    function createRequest(string calldata description, uint value, address recipient) public restricted {
+    function createRequest(string calldata description, uint256 value, address payable recipient) public restricted {
         Request storage newRequest = requests.push();
         newRequest.description = description;
         newRequest.value = value;
@@ -49,7 +53,7 @@ contract Campaign {
         newRequest.approvalCount = 0;
     }
 
-    function approveRequest(uint index) public {
+    function approveRequest(uint256 index) public {
         Request storage request = requests[index];
 
         require(approvers[msg.sender], "Sender is not an approver");
@@ -59,7 +63,7 @@ contract Campaign {
         request.approvalCount++;
     }
 
-    function finalizeRequest(uint index) public restricted {
+    function finalizeRequest(uint256 index) public restricted {
         Request storage request = requests[index];
 
         require(!request.complete, "Request is already completed");
@@ -67,5 +71,27 @@ contract Campaign {
 
         payable(request.recipient).transfer(request.value);
         request.complete = true;
+    }
+
+    function getSummary() public view 
+      returns (
+        uint256, 
+        uint256, 
+        uint256, 
+        uint256, 
+        address
+      ) 
+    {
+        return (
+          minimumContribution,
+          address(this).balance,
+          requests.length,
+          approversCount,
+          manager
+        );
+    }
+
+    function getRequestsCount() public view returns (uint256) {
+        return requests.length;
     }
 }
