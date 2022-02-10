@@ -1,6 +1,6 @@
 import Web3 from "web3";
 
-const httpProvider = new Web3.providers.HttpProvider(process.env.INFURA_PROVIDER_URL);
+const httpProvider = new Web3.providers.HttpProvider('http://localhost:8545'); //new Web3.providers.HttpProvider(process.env.INFURA_PROVIDER_URL);
 
 export const initialState = {
   connected: false,
