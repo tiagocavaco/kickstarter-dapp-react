@@ -12,7 +12,7 @@ describe('Index', () => {
     )
 
     const heading = screen.getByRole('heading', {
-      name: /This is the campaign list page!!!/i,
+      name: /Open Campaigns/i,
     })
 
     expect(heading).toBeInTheDocument()
