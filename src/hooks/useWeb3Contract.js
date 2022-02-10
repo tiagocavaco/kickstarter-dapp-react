@@ -10,16 +10,16 @@ const useWeb3Contract = (config = {}) => {
   useEffect(() => {
     console.log('CHECK CONTRACT INSTANCE!');
 
-    if (web3) {
+    if (web3 && abi && address) {
       createContract();
     }
-  }, [web3, chainId]);
+  }, [web3, chainId, abi, address]);
 
   const createContract = async () => {
     const code = await web3.eth.getCode(address);
 
     if (code != '0x') {
-      console.log('CONTRACT INSTANCE CREATED!');
+      console.log('CONTRACT INSTANCE CREATED:', address);
 
       const contract = new web3.eth.Contract(abi, address);
 
