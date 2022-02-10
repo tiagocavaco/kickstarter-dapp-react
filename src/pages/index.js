@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { useGlobalContext } from '../context/store';
 import useContractManager from '../hooks/useContractManager';
 import { Container, Card, Button } from 'semantic-ui-react';
-import { Link } from '../routes';
 
 const Index = () => {
   const [campaigns, setCampaigns] = useState([]);
@@ -28,7 +28,7 @@ const Index = () => {
     const items = campaigns.map(address => {
       return {
         header: address,
-        description: <Link route={`/campaigns/${address}`}><a>View Campaign</a></Link>,
+        description: <Link href={`/campaigns/${address}`}><a>View Campaign</a></Link>,
         fluid: true
       }
     });
@@ -40,7 +40,7 @@ const Index = () => {
     <Container>
       <h3>Open Campaigns</h3>
 
-      <Link route='/campaigns/new'>
+      <Link href='/campaigns/new'>
         <a>
           <Button content='Create Campaign' icon='add circle' primary={true} floated='right'></Button>
         </a>

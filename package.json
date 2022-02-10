@@ -8,7 +8,7 @@
     "contract-test": "mocha ethereum/test",
     "build": "node ethereum/compile.js",
     "deploy": "node ethereum/deploy.js",
-    "dev": "node src/server.js"
+    "dev": "next dev"
   },
   "author": "tiagocavaco https://github.com/tiagocavaco",
   "license": "ISC",

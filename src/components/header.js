@@ -1,9 +1,9 @@
+import Link from 'next/link';
 import useWeb3Modal from '../hooks/useWeb3Modal';
 import { useGlobalContext } from '../context/store';
 import { getChainData } from '../helpers/chains';
 import { getTruncatedAddress } from '../helpers/utils';
 import { Menu, Button, Label, Icon } from 'semantic-ui-react';
-import { Link } from '../routes';
 
 const Header = () => {
   const { globalState } = useGlobalContext();
@@ -14,10 +14,10 @@ const Header = () => {
 
   return (
     <Menu>
-      <Link route='/'><a className='item'>Kickstarter</a></Link>
+      <Link href='/'><a className='item'>Kickstarter</a></Link>
       <Menu.Menu position='right'>
-        <Link route='/'><a className='item'>Campaigns</a></Link>
-        <Link route='/campaigns/new'><a className='item'>+</a></Link>
+        <Link href='/'><a className='item'>Campaigns</a></Link>
+        <Link href='/campaigns/new'><a className='item'>+</a></Link>
         <Menu.Item>
           {!connected ?
             <Button basic color='blue' onClick={connect} floated='right'>Connect Wallet</Button>
