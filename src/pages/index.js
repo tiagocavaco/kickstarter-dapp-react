@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useGlobalContext } from '../context/store';
 import useContractManager from '../hooks/useContractManager';
-import { Container, Card, Button } from 'semantic-ui-react';
+import { Container, Card, Button, Grid } from 'semantic-ui-react';
 
 const Index = () => {
   const [campaigns, setCampaigns] = useState([]);
@@ -29,24 +29,29 @@ const Index = () => {
       return {
         header: address,
         description: <Link href={`/campaigns/${address}`}><a>View Campaign</a></Link>,
-        fluid: true
+        style: { overflowWrap: 'break-word', margin: '0.875em 0' },
       }
     });
 
-    return <Card.Group items={items}></Card.Group>
+    return <Card.Group items={items} itemsPerRow={1} centered={true}></Card.Group>
   }
 
   return (
     <Container>
       <h3>Open Campaigns</h3>
 
-      <Link href='/campaigns/new'>
-        <a>
-          <Button content='Create Campaign' icon='add circle' primary={true} floated='right'></Button>
-        </a>
-      </Link>
-
-      {renderCampaigns()}
+      <Grid columns={2} reversed='computer'>
+        <Grid.Column computer={'3'} width={'16'} >
+          <Link href='/campaigns/new'>
+            <a>
+              <Button content='Create Campaign' icon='add circle' primary={true} fluid={true}></Button>
+            </a>
+          </Link>
+        </Grid.Column>
+        <Grid.Column computer={'13'} width={'16'}>
+          {renderCampaigns()}
+        </Grid.Column>
+      </Grid>
     </Container>
   )
 }

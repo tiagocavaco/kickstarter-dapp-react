@@ -13,17 +13,17 @@ const Header = () => {
   const { name: networkName, native_currency: currency } = getChainData(chainId);
 
   return (
-    <Menu>
+    <Menu stackable={true}>
       <Link href='/'><a className='item'>Kickstarter</a></Link>
       <Menu.Menu position='right'>
         <Link href='/'><a className='item'>Campaigns</a></Link>
-        <Link href='/campaigns/new'><a className='item'>+</a></Link>
-        <Menu.Item>
+        <Link href='/campaigns/new'><a className='item'>New</a></Link>
+        <Menu.Item style={{justifyContent: 'center'}}>
           {!connected ?
-            <Button basic color='blue' onClick={connect} floated='right'>Connect Wallet</Button>
+            <Button basic color='blue' onClick={connect}>Connect Wallet</Button>
             :
             <>
-              <Button as='div' labelPosition='left' floated='right'>
+              <Button as='div' labelPosition='left'>
                 <Label as='span' horizontal>
                   {getTruncatedAddress(address)}
                   <Label.Detail>
