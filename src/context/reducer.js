@@ -1,11 +1,10 @@
 import Web3 from "web3";
-
-const httpProvider = new Web3.providers.HttpProvider('http://localhost:8545'); //new Web3.providers.HttpProvider(process.env.INFURA_PROVIDER_URL);
+import { providerHttp, web3Http } from "../helpers/providers";
 
 export const initialState = {
   connected: false,
-  provider: httpProvider,
-  web3:  new Web3(httpProvider),
+  provider: providerHttp,
+  web3: web3Http,
   chainId: 4,
   address: null,
   balance: 0,
@@ -37,6 +36,6 @@ export const stateToJSON = (state) => {
         return value;
     }
   };
-  
+
   return JSON.stringify(state, jsonStringifyReplacer);
 }

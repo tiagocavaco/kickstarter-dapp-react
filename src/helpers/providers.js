@@ -1,3 +1,5 @@
+import Web3 from "web3";
+
 export const providerOptions = { 
   'custom-trust-wallet': {
     display: {
@@ -26,3 +28,7 @@ export const providerOptions = {
     }
   }
 };
+
+export const providerHttp = new Web3.providers.HttpProvider('http://localhost:8545'); //new Web3.providers.HttpProvider(process.env.INFURA_PROVIDER_URL);
+
+export const web3Http = new Web3(providerHttp);

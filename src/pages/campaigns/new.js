@@ -17,7 +17,7 @@ const New = () => {
   const { connected, address } = globalState;
 
   const onSubmit = async (e) => {
-    console.log('Submitted');
+    console.log('CREATE CAMPAIGN FORM SUBMITTED');
     e.preventDefault();
 
     setLoading(true);
@@ -25,9 +25,9 @@ const New = () => {
 
     try {
       await campaignFactoryContract.methods.createCampaign(minimumContribution).send({ from: address });
-
-      await refreshBalance();
-
+      
+      refreshBalance();
+      
       router.push('/');
     } catch (err) {
       setErrorMessage(err.message);
