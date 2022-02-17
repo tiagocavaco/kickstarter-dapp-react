@@ -23,10 +23,8 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: Install deps and build (with cache)
-        uses: bahmutov/npm-install@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install packages
+        run: yarn install
 
       - name: Test
         run: yarn ui-test
@@ -52,8 +50,8 @@ jobs:
         with:
           node-version: '16.x'
 
-      - name: Install deps and build (with cache)
-        uses: bahmutov/npm-install@v1
+      - name: Install packages
+        run: yarn install
 
       - name: Build
         run: yarn build && yarn export && touch ./out/.nojekyll
