@@ -23,8 +23,10 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
 
-      - name: Install packages
-        run: yarn install
+      - name: Install deps and build (with cache)
+        uses: bahmutov/npm-install@v1
+        with:
+          install-command: yarn install --frozen-lockfile
 
       - name: Test
         run: yarn ui-test
@@ -50,8 +52,10 @@ jobs:
         with:
           node-version: '16.x'
 
-      - name: Install packages
-        run: yarn install
+      - name: Install deps and build (with cache)
+        uses: bahmutov/npm-install@v1
+        with:
+          install-command: yarn install --frozen-lockfile
 
       - name: Build
         run: yarn build && yarn export && touch ./out/.nojekyll
