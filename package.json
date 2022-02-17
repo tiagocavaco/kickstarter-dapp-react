@@ -6,9 +6,12 @@
   "scripts": {
     "ui-test": "jest",
     "contract-test": "mocha ethereum/test",
-    "build": "node ethereum/compile.js",
-    "deploy": "node ethereum/deploy.js",
-    "dev": "next dev"
+    "contract-build": "node ethereum/compile.js",
+    "contract-deploy": "node ethereum/deploy.js",
+    "dev": "next dev",
+    "build": "next build",
+    "export": "next export",
+    "start": "next start"
   },
   "author": "tiagocavaco https://github.com/tiagocavaco",
   "license": "ISC",
