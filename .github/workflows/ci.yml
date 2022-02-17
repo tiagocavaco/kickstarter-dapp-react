@@ -34,7 +34,7 @@ jobs:
   deploy:
     name: Deploy page
     
-    needs: test
+    # needs: test
 
     runs-on: ubuntu-latest
 
