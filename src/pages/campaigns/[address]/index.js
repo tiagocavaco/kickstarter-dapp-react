@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { useGlobalContext } from '../../../context/store';
 import useContractManager from '../../../hooks/useContractManager';
-import { Container, Card, Grid } from 'semantic-ui-react';
+import { Container, Card, Grid, Button } from 'semantic-ui-react';
 import { getEtherBalance } from '../../../helpers/utils';
 import ContributeForm from '../../../components/contributeForm';
 
@@ -78,13 +79,22 @@ const Index = (props) => {
   return (
     <Container>
       <h3>Campaign Show</h3>
-      <Grid columns={2} reversed='computer'>
-        <Grid.Column computer={'6'} width={'16'} >
+      <Grid reversed='computer'>
+        <Grid.Column computer={'6'} mobile={'16'} >
           <ContributeForm address={props.address} refreshCampaignSummary={getCampaignSummary}></ContributeForm>
         </Grid.Column>
-        <Grid.Column computer={'10'} width={'16'}>
+        <Grid.Column computer={'10'} mobile={'16'}>
           {renderCards()}
         </Grid.Column>
+        <Grid.Row>
+          <Grid.Column>
+            <Link href={`/campaigns/${props.address}/requests`}>
+              <a>
+                <Button primary>View Requests</Button>
+              </a>
+            </Link>
+          </Grid.Column>
+        </Grid.Row>
       </Grid>
     </Container>
   )
