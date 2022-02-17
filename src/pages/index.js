@@ -41,14 +41,14 @@ const Index = () => {
       <h3>Open Campaigns</h3>
 
       <Grid columns={2} reversed='computer'>
-        <Grid.Column computer={'3'} width={'16'} >
+        <Grid.Column computer={'3'} mobile={'16'} >
           <Link href='/campaigns/new'>
             <a>
               <Button content='Create Campaign' icon='add circle' primary={true} fluid={true}></Button>
             </a>
           </Link>
         </Grid.Column>
-        <Grid.Column computer={'13'} width={'16'}>
+        <Grid.Column computer={'13'} mobile={'16'}>
           {renderCampaigns()}
         </Grid.Column>
       </Grid>

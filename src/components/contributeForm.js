@@ -13,6 +13,7 @@ const ContributeForm = (props) => {
   const { refreshBalance } = useRefreshBalance();
   const { globalState } = useGlobalContext();
   const { connected, address } = globalState;
+  const { refreshCampaignSummary } = props;
 
   const onSubmit = async (e) => {
     console.log('CONTRIBUTE FORM SUBMITTED!');
@@ -24,7 +25,7 @@ const ContributeForm = (props) => {
     try {
       await campaignContract.methods.contribute().send({ from: address, value: convertFromEtherToWei(value) });
       
-      props.refreshCampaignSummary();
+      refreshCampaignSummary();
       refreshBalance();
       
       setValue('');
