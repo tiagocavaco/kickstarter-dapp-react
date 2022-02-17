@@ -24,7 +24,7 @@ jobs:
           node-version: ${{ matrix.node }}
 
       - name: Install packages
-        run: yarn ci
+        run: yarn install
 
       - name: Test
         run: yarn ui-test
