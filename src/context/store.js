@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useReducer, useRef, useMemo } from 'react';
-import { reducer, initialState, stateToJSON } from './reducer';
+import { reducer, initialState, stateToJSON } from '@context/reducer';
 
 export const GlobalContext = createContext();
 

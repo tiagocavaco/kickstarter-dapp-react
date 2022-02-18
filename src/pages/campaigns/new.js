@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { useGlobalContext } from '../../context/store';
-import useContractManager from '../../hooks/useContractManager';
-import useRefreshBalance from '../../hooks/useRefreshBalance';
+import { useGlobalContext } from '@context/store';
+import useContractManager from '@hooks/useContractManager';
+import useRefreshBalance from '@hooks/useRefreshBalance';
 import { Container, Form, Input, Button, Message } from 'semantic-ui-react';
 
 const New = () => {

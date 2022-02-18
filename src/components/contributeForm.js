@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useGlobalContext } from '../context/store';
-import useContractManager from '../hooks/useContractManager';
-import useRefreshBalance from '../hooks/useRefreshBalance';
-import { convertFromEtherToWei } from '../helpers/utils';
+import { useGlobalContext } from '@context/store';
+import useContractManager from '@hooks/useContractManager';
+import useRefreshBalance from '@hooks/useRefreshBalance';
+import { convertFromEtherToWei } from '@helpers/utils';
 import { Button, Form, Input, Message } from 'semantic-ui-react';
 
 const ContributeForm = (props) => {

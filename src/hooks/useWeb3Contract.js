@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useGlobalContext } from '../context/store';
+import { useGlobalContext } from '@context/store';
 
 const useWeb3Contract = (config = {}) => {
   const [contract, setContract] = useState(null);

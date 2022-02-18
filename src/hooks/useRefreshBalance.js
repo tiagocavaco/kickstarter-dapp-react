@@ -1,5 +1,5 @@
-import { useGlobalContext } from '../context/store';
-import { getEtherBalance } from '../helpers/utils';
+import { useGlobalContext } from '@context/store';
+import { getEtherBalance } from '@helpers/utils';
 
 const useRefreshBalance = (config = {}) => {
   const { globalState, dispatch } = useGlobalContext();

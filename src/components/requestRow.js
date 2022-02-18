@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { useGlobalContext } from '../context/store';
-import useContractManager from '../hooks/useContractManager';
-import useRefreshBalance from '../hooks/useRefreshBalance';
-import { getEtherBalance } from '../helpers/utils';
+import { useGlobalContext } from '@context/store';
+import useContractManager from '@hooks/useContractManager';
+import useRefreshBalance from '@hooks/useRefreshBalance';
+import { getEtherBalance } from '@helpers/utils';
 import { Button, Table, Label } from 'semantic-ui-react';
 
 const RequestRow = (props) => {

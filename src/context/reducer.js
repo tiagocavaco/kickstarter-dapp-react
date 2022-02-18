@@ -1,5 +1,4 @@
-import Web3 from "web3";
-import { providerHttp, web3Http } from "../helpers/providers";
+import { providerHttp, web3Http } from "@helpers/providers";
 
 export const initialState = {
   connected: false,
@@ -8,7 +7,7 @@ export const initialState = {
   chainId: 4,
   address: null,
   balance: 0,
-  persistenceType: 'sessionStorage', //'sessionStorage',
+  persistenceType: 'sessionStorage', //'localStorage',
 };
 
 export const reducer = (state, action) => {

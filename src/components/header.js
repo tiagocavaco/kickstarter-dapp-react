@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import useWeb3Modal from '../hooks/useWeb3Modal';
-import { useGlobalContext } from '../context/store';
-import { getChainData } from '../helpers/chains';
-import { getTruncatedAddress } from '../helpers/utils';
+import useWeb3Modal from '@hooks/useWeb3Modal';
+import { useGlobalContext } from '@context/store';
+import { getChainData } from '@helpers/chains';
+import { getTruncatedAddress } from '@helpers/utils';
 import { Menu, Button, Label, Icon } from 'semantic-ui-react';
 
 const Header = () => {

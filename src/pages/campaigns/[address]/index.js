@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useGlobalContext } from '../../../context/store';
-import useContractManager from '../../../hooks/useContractManager';
-import { getEtherBalance } from '../../../helpers/utils';
-import ContributeForm from '../../../components/contributeForm';
+import { useGlobalContext } from '@context/store';
+import useContractManager from '@hooks/useContractManager';
+import { getEtherBalance } from '@helpers/utils';
+import ContributeForm from '@components/contributeForm';
 import { Container, Card, Grid, Button, Dimmer, Loader } from 'semantic-ui-react';
 
 const Index = (props) => {

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useGlobalContext } from '../context/store';
-import useContractManager from '../hooks/useContractManager';
+import { useGlobalContext } from '@context/store';
+import useContractManager from '@hooks/useContractManager';
 import { Container, Card, Button, Grid, Dimmer, Loader } from 'semantic-ui-react';
 
 const Index = () => {

@@ -1,10 +1,10 @@
 import { useState, useCallback, useEffect } from 'react';
 import Web3 from "web3";
 import Web3Modal from "web3modal";
-import { useGlobalContext } from '../context/store';
-import { providerOptions } from '../helpers/providers';
-import { supportedChains, getChainData } from '../helpers/chains';
-import { getEtherBalance } from '../helpers/utils';
+import { useGlobalContext } from '@context/store';
+import { providerOptions } from '@helpers/providers';
+import { supportedChains, getChainData } from '@helpers/chains';
+import { getEtherBalance } from '@helpers/utils';
 
 const useWeb3Modal = (config = {}) => {
   const [web3Modal, setWeb3Modal] = useState(null);
