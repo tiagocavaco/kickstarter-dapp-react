@@ -43,18 +43,18 @@ const Index = () => {
       }
     });
 
-    return <Card.Group items={items} itemsPerRow={1} centered={true}></Card.Group>
+    return <Card.Group items={items} itemsPerRow={1} centered></Card.Group>
   }
 
   return (
     <Container>
-      <h3>Open Campaigns</h3>
+      <h3>Campaigns</h3>
 
       <Grid columns={2} reversed='computer'>
         <Grid.Column computer={'3'} mobile={'16'} >
           <Link href='/campaigns/new'>
             <a>
-              <Button content='Create Campaign' icon='add circle' primary={true} fluid={true}></Button>
+              <Button content='Create Campaign' icon='add circle' primary fluid></Button>
             </a>
           </Link>
         </Grid.Column>

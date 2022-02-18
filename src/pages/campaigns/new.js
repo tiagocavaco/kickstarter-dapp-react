@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { useGlobalContext } from '../../context/store';
 import useContractManager from '../../hooks/useContractManager';
 import useRefreshBalance from '../../hooks/useRefreshBalance';
@@ -7,7 +8,7 @@ import { Container, Form, Input, Button, Message } from 'semantic-ui-react';
 
 const New = () => {
   const router = useRouter();
-  
+
   const [minimumContribution, setMinimumContribution] = useState('');
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
@@ -25,9 +26,9 @@ const New = () => {
 
     try {
       await campaignFactoryContract.methods.createCampaign(minimumContribution).send({ from: address });
-      
+
       refreshBalance();
-      
+
       router.push('/');
     } catch (err) {
       setErrorMessage(err.message);
@@ -38,7 +39,11 @@ const New = () => {
 
   return (
     <Container>
-      <h3>Create a Campaign</h3>
+      <Link href='/'>
+        <a>&#60; Back</a>
+      </Link>
+
+      <h3>Create Campaign</h3>
 
       <Form onSubmit={onSubmit} error={!!errorMessage}>
         <Form.Field>

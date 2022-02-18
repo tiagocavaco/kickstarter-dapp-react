@@ -83,7 +83,7 @@ const Index = (props) => {
       },
     ];
 
-    return <Card.Group items={items} itemsPerRow={2} doubling={true}></Card.Group>
+    return <Card.Group items={items} itemsPerRow={2} doubling></Card.Group>
   }
 
   return (
