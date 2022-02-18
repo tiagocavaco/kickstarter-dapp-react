@@ -4,7 +4,7 @@
   "description": "",
   "private": true,
   "scripts": {
-    "ui-test": "jest",
+    "ui-test": "jest src/__tests__",
     "contract-test": "mocha ethereum/test",
     "contract-build": "node ethereum/compile.js",
     "contract-deploy": "node ethereum/deploy.js",

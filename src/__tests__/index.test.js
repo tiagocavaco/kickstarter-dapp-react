@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import Index from '../pages/index';
-import { GlobalStore, GlobalContext } from '../context/store';
+import Index from '@pages/index';
+import { GlobalStore, GlobalContext } from '@context/store';
 
 describe('Index', () => {
   it('renders a heading', () => {
