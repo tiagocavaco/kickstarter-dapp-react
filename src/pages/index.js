@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useGlobalContext } from '../context/store';
 import useContractManager from '../hooks/useContractManager';
-import { Container, Card, Button, Grid } from 'semantic-ui-react';
+import { Container, Card, Button, Grid, Dimmer, Loader } from 'semantic-ui-react';
 
 const Index = () => {
   const [campaigns, setCampaigns] = useState([]);
+  const [loading, setLoading] = useState(true);
   const { campaignFactoryContract } = useContractManager();
   const { globalState } = useGlobalContext();
   const { connected } = globalState;
@@ -18,9 +19,18 @@ const Index = () => {
     console.log('GET DEPLOYED CAMPAIGNS');
     if (campaignFactoryContract) {
       console.log('SET CAMPAIGNS');
-      const campaigns = await campaignFactoryContract.methods.getDeployedCampaigns().call();
 
-      setCampaigns(campaigns);
+      setLoading(true);
+
+      try {
+        const campaigns = await campaignFactoryContract.methods.getDeployedCampaigns().call();
+
+        setCampaigns(campaigns);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
     }
   }
 
@@ -49,6 +59,10 @@ const Index = () => {
           </Link>
         </Grid.Column>
         <Grid.Column computer={'13'} mobile={'16'}>
+          <Dimmer active={loading} inverted>
+            <Loader></Loader>
+          </Dimmer>
+
           {renderCampaigns()}
         </Grid.Column>
       </Grid>

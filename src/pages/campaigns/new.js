@@ -48,7 +48,7 @@ const New = () => {
 
         <Message error header='Oops!' content={errorMessage}></Message>
 
-        <Button primary disabled={!connected || !campaignFactoryContract} loading={loading}>Create</Button>
+        <Button primary disabled={!connected || !campaignFactoryContract || loading} loading={loading}>Create</Button>
       </Form>
     </Container>
   )

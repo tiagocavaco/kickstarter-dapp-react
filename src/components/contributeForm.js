@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { useGlobalContext } from '../context/store';
 import useContractManager from '../hooks/useContractManager';
 import useRefreshBalance from '../hooks/useRefreshBalance';
-import { Button, Form, Input, Message } from 'semantic-ui-react';
 import { convertFromEtherToWei } from '../helpers/utils';
+import { Button, Form, Input, Message } from 'semantic-ui-react';
 
 const ContributeForm = (props) => {
   const [value, setValue] = useState('');
@@ -45,7 +45,7 @@ const ContributeForm = (props) => {
 
       <Message error header='Oops!' content={errorMessage}></Message>
 
-      <Button primary disabled={!connected || !campaignContract} loading={loading} role='button'>Contribute</Button>
+      <Button primary disabled={!connected || !campaignContract || loading} loading={loading} role='button'>Contribute</Button>
     </Form>
   )
 }

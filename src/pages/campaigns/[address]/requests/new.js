@@ -64,7 +64,7 @@ const New = (props) => {
 
         <Message error header='Oops!' content={errorMessage}></Message>
 
-        <Button primary disabled={!connected || !campaignContract} loading={loading}>Create</Button>
+        <Button primary disabled={!connected || !campaignContract || loading} loading={loading}>Create</Button>
       </Form>
     </Container>
   )

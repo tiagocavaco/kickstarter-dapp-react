@@ -1,6 +1,6 @@
 # kickstarter-dapp-react
 
-Kickstarter dapp in react and solidity, learning example.
+Kickstarter dapp in react and solidity, learning example. [kickstarter-dapp-react](https://tiagocavaco.github.io/kickstarter-dapp-react/)
 
 ## Getting started
 

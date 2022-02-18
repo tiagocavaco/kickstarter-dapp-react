@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useGlobalContext } from '../../../context/store';
 import useContractManager from '../../../hooks/useContractManager';
-import { Container, Card, Grid, Button } from 'semantic-ui-react';
 import { getEtherBalance } from '../../../helpers/utils';
 import ContributeForm from '../../../components/contributeForm';
+import { Container, Card, Grid, Button, Dimmer, Loader } from 'semantic-ui-react';
 
 const Index = (props) => {
   const [campaignSummary, setCampaignSummary] = useState(null);
+  const [loading, setLoading] = useState(true);
   const { campaignContract } = useContractManager({ address: props.address });
   const { globalState } = useGlobalContext();
   const { connected } = globalState;
@@ -20,15 +21,24 @@ const Index = (props) => {
     console.log('GET CAMPAIGN SUMMARY');
     if (campaignContract) {
       console.log('SET CAMPAIGN SUMMARY');
-      const { '0': minimumContribution, '1': balance, '2': requestsCount, '3': approversCount, '4': manager } = await campaignContract.methods.getSummary().call();
 
-      setCampaignSummary({
-        minimumContribution,
-        balance,
-        requestsCount,
-        approversCount,
-        manager
-      });
+      setLoading(true);
+
+      try {
+        const { '0': minimumContribution, '1': balance, '2': requestsCount, '3': approversCount, '4': manager } = await campaignContract.methods.getSummary().call();
+
+        setCampaignSummary({
+          minimumContribution,
+          balance,
+          requestsCount,
+          approversCount,
+          manager
+        });
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setLoading(false);
+      }
     }
   }
 
@@ -78,12 +88,21 @@ const Index = (props) => {
 
   return (
     <Container>
-      <h3>Campaign Show</h3>
+      <Link href='/'>
+        <a>&#60; Back</a>
+      </Link>
+
+      <h3>Campaign</h3>
+
       <Grid reversed='computer'>
         <Grid.Column computer={'6'} mobile={'16'} >
           <ContributeForm address={props.address} refreshCampaignSummary={getCampaignSummary}></ContributeForm>
         </Grid.Column>
         <Grid.Column computer={'10'} mobile={'16'}>
+          <Dimmer active={loading} inverted>
+            <Loader></Loader>
+          </Dimmer>
+
           {renderCards()}
         </Grid.Column>
         <Grid.Row>
