@@ -46,7 +46,7 @@ const New = (props) => {
         <a>&#60; Back</a>
       </Link>
 
-      <h3>Create a Request</h3>
+      <h3>Create Request</h3>
 
       <Form onSubmit={onSubmit} error={!!errorMessage}>
         <Form.Field>
