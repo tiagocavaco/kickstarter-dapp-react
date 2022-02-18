@@ -76,8 +76,8 @@ const Index = (props) => {
           'Number of people who have already donated to this campaign',
       },
       {
-        header: getEtherBalance(balance),
-        meta: 'Campaign Balance (ether)',
+        header: `${getEtherBalance(balance)} ETH`,
+        meta: 'Campaign Balance',
         description:
           'The balance is how much money this campaign has left to spend',
       },
